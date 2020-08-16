@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Embed</title>
+        <link rel="stylesheet" href="{% static 'main_player/index.css' %}" />
+    </head>
+    <body onfocus="set_focus();">
+        <main>
+            <div id="content">
+                <h1 id="title_main">Placeholder Title 2</h1>
+                <video id="video_player" width="320" height="280" controls tab-index='0'>
+                    <source src={% static 'nogi.mp4' type='video/mp4' %}>
+                    Your browser does not support the video tag. 
+                </video>
+            </div>
+
+            <div id="subtitle">
+                <h2 id="subtitle_main">This is some placeholder subtitles 走った that could potentially
+                    go on forever and ever and ever
+                </h2>
+            </div>
+        </main>
+    </body>
+</html>
+
+<script>
+    function set_focus()
+    {
+        document.getElementById("video_player").focus()
+    }
+</script>
