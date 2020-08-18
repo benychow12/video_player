@@ -8,20 +8,17 @@ main {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 85%;
     text-align: center;
 
 }
 
 #content {
-    padding-top: 5%;
+    padding-top: 0%;
 }
 
-#video_iframe {
+#video_frame {
     width: 100% !important;
-    height: 720px !important;
-}
-
-#subtitle {
-    font-size: 22px; 
+    height: auto !important;
+    max-height: 720px;
 }
