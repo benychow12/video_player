@@ -59,7 +59,7 @@
 		// detect media element track support in browser via the existence of the addtrack method
 		var myVideo = document.getElementsByTagName('video')[0];
 		var tracksupport = typeof myVideo.addTextTrack == "function" ? true : false;	// check for track element method, if it doesn't exist, the browser generally doesn't support track elements
-
+       
 		// first find all video tags
 		$VIDEOSUB('video').each(function(el) {
 			// find track tag (this should be extended to allow multiple tracks and trackgroups) and get URL of subtitle file
@@ -144,20 +144,27 @@
 				$VIDEOSUB(el).addListener('ended', update_position);
 				$VIDEOSUB(el).addListener('seeked', update_position);
 
+                var subtime_offset = 1;
+
 				// add event handler to be called while video is playing
 				$VIDEOSUB(el).addListener('timeupdate', function(an_event){
 					var subtitle = '';
 					// check if the next subtitle is in the current time range
-					if (this.currentTime.toFixed(1) > videosub_timecode_min(el.subtitles[el.subcount][1])  &&  this.currentTime.toFixed(1) < videosub_timecode_max(el.subtitles[el.subcount][1])) {
+					if ((this.currentTime + subtime_offset).toFixed(1) > videosub_timecode_min(el.subtitles[el.subcount][1])  &&  (this.currentTime + subtime_offset).toFixed(1) < videosub_timecode_max(el.subtitles[el.subcount][1])) {
 						// a subtitle element countains metadata on the first
 						// two lines (index and timing information); we skip
 						// those two lines and display the rest
 						var full = el.subtitles[el.subcount];
 						var text = full.slice(2, full.length);
-						subtitle = text.join('<br>');
+                        var text2 = text.join('<br>');
+                        var text3 = text2 + this.currentTime.toFixed(1).toString();
+                        var super_time = (this.currentTime + subtime_offset).toFixed(1);
+						subtitle = text3 + '<br>' + super_time.toString();
+                        // subtitle = subtitle.join(this.currentTime.toString());
+                        // subtitle = subtime_offset;
 					}
 					// is there a next timecode?
-					if (this.currentTime.toFixed(1) > videosub_timecode_max(el.subtitles[el.subcount][1])  && el.subcount < (el.subtitles.length-1)) {
+					if ((this.currentTime + subtime_offset).toFixed(1) > videosub_timecode_max(el.subtitles[el.subcount][1])  && el.subcount < (el.subtitles.length-1)) {
 						el.subcount++;
 					}
 					// update subtitle div	
