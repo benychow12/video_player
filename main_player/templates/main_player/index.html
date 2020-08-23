@@ -13,11 +13,18 @@
                     <!--
                     <source src={% static 'nogi.mp4' type='video/mp4' %}>
                     -->
-                    <source src={% static 'asuka.webm' type='video/webm' %}>
+                    <source src={% static 'yurucamp01.mp4' type='video/mp4' %}>
                     <track kind="subtitles" srclang="jp" label="Japanese"
-                        src={% static 'nogi.srt' %} default>
+                        src={% static 'yuru_camp_ep1.srt' %} default>
                     Your browser does not support the video tag. 
                 </video>
+            </div>
+            <div id="settings">
+                <form>
+                    <input type="button" onclick="" value="Subs--" />
+                    <input type="text" id="offset_num" value="0" />
+                    <input type="button" onclick="" value="Subs++" />
+                </form>
             </div>
         </main>
     </body>

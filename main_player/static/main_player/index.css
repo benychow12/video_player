@@ -13,6 +13,16 @@ main {
 
 }
 
+#settings {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+}
+
+#offset_num {
+    width: 20px;
+}
+
 #content {
     padding-top: 0%;
 }
