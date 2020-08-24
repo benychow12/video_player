@@ -21,9 +21,11 @@
             </div>
             <div id="settings">
                 <form>
-                    <input type="button" onclick="" value="Subs--" />
+                    <input type="button" onclick="decrement_value();"
+                    value="Sub Delay" />
                     <input type="text" id="offset_num" value="0" />
-                    <input type="button" onclick="" value="Subs++" />
+                    <input type="button" onclick="increment_value();"
+                    value="Sub Rush" />
                 </form>
             </div>
         </main>
@@ -33,8 +35,24 @@
 <script>
     function set_focus()
     {
-        document.getElementById("video_frame").focus()
+        document.getElementById("video_frame").focus();
     }
 </script>
 
 <script src={% static 'main_player/videosub.js' %}></script>
+
+<script>
+    function increment_value()
+    {
+        var value = parseFloat(document.getElementById('offset_num').value, 10);
+        value++;
+        document.getElementById('offset_num').value = value;
+    }
+
+    function decrement_value()
+    {
+        var value = parseFloat(document.getElementById('offset_num').value, 10);
+        value--;
+        document.getElementById('offset_num').value = value;
+    }
+</script>

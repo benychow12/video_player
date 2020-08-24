@@ -144,25 +144,28 @@
 				$VIDEOSUB(el).addListener('ended', update_position);
 				$VIDEOSUB(el).addListener('seeked', update_position);
 
-                var subtime_offset = 1;
-
 				// add event handler to be called while video is playing
 				$VIDEOSUB(el).addListener('timeupdate', function(an_event){
 					var subtitle = '';
+                    // Sub retiming
+                    var subtime_offset = parseFloat(document.getElementById('offset_num').value, 10);
 					// check if the next subtitle is in the current time range
 					if ((this.currentTime + subtime_offset).toFixed(1) > videosub_timecode_min(el.subtitles[el.subcount][1])  &&  (this.currentTime + subtime_offset).toFixed(1) < videosub_timecode_max(el.subtitles[el.subcount][1])) {
 						// a subtitle element countains metadata on the first
 						// two lines (index and timing information); we skip
 						// those two lines and display the rest
 						var full = el.subtitles[el.subcount];
-						var text = full.slice(2, full.length);
-                        var text2 = text.join('<br>');
-                        var text3 = text2 + this.currentTime.toFixed(1).toString();
-                        var super_time = (this.currentTime + subtime_offset).toFixed(1);
-						subtitle = text3 + '<br>' + super_time.toString();
+						var sub_text = full.slice(2, full.length);
+                        var sub_text_br = sub_text.join('<br>');
+                        var sub_curr_time = sub_text_br + 'Sub time: ' + (this.currentTime).toFixed(1).toString();
+						subtitle = sub_curr_time + '<br>';
                         // subtitle = subtitle.join(this.currentTime.toString());
                         // subtitle = subtime_offset;
 					}
+                    else
+                    {
+                        subtitle = 'Cur time: ' + this.currentTime.toFixed(1).toString();
+                    }
 					// is there a next timecode?
 					if ((this.currentTime + subtime_offset).toFixed(1) > videosub_timecode_max(el.subtitles[el.subcount][1])  && el.subcount < (el.subtitles.length-1)) {
 						el.subcount++;
