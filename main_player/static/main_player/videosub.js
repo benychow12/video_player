@@ -144,6 +144,7 @@
 				$VIDEOSUB(el).addListener('ended', update_position);
 				$VIDEOSUB(el).addListener('seeked', update_position);
 
+                var prev_subtitle = '';
 				// add event handler to be called while video is playing
 				$VIDEOSUB(el).addListener('timeupdate', function(an_event){
 					var subtitle = '';
@@ -159,12 +160,14 @@
                         var sub_text_br = sub_text.join('<br>');
                         var sub_curr_time = sub_text_br + 'Sub time: ' + (this.currentTime).toFixed(1).toString();
 						subtitle = sub_curr_time + '<br>';
+                        prev_subtitle = subtitle;
                         // subtitle = subtitle.join(this.currentTime.toString());
                         // subtitle = subtime_offset;
 					}
                     else
                     {
-                        subtitle = 'Cur time: ' + this.currentTime.toFixed(1).toString();
+                        // subtitle = 'Cur time: ' + this.currentTime.toFixed(1).toString();
+                        subtitle = prev_subtitle + '...';
                     }
 					// is there a next timecode?
 					if ((this.currentTime + subtime_offset).toFixed(1) > videosub_timecode_max(el.subtitles[el.subcount][1])  && el.subcount < (el.subtitles.length-1)) {
