@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html onclick="set_focus();" >
+    <head>
+        <title>Standalone</title>
+        <link rel="stylesheet" href="index.css" />
+
+        <script src="videosub.js"></script>
+
+        <script>
+            function set_focus()
+            {
+                document.getElementById("video_frame").focus();
+            }
+        </script>
+
+        <script>
+            function increment_value()
+            {
+                var value = parseFloat(document.getElementById('offset_num').value, 10);
+                value++;
+                document.getElementById('offset_num').value = value;
+            }
+
+            function decrement_value()
+            {
+                var value = parseFloat(document.getElementById('offset_num').value, 10);
+                value--;
+                document.getElementById('offset_num').value = value;
+            }
+        </script>
+    </head>
+
+    <body onload="set_focus();">
+        <main>
+            <div id="content">
+                <video id="video_frame" controls tab-index='0'>
+                    <source src="/mnt/hgfs/Shared/ths01e02.mp4" type="video/mp4" />
+                    <track kind="subtitles" src="/mnt/hgfs/Shared/200817.srt" default />
+                    Your browser does not support the video tag. 
+                </video>
+            </div>
+            <div id="settings">
+                <form>
+                    <input type="button" onclick="decrement_value();"
+                    value="Sub Delay" />
+                    <input type="text" id="offset_num" value="0" />
+                    <input type="button" onclick="increment_value();"
+                    value="Sub Rush" />
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
